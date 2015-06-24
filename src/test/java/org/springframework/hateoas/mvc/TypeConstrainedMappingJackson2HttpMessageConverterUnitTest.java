@@ -79,4 +79,16 @@ public class TypeConstrainedMappingJackson2HttpMessageConverterUnitTest {
 
 		assertThat(converter.canRead(String.class, Object.class, MediaType.APPLICATION_JSON), is(false));
 	}
+
+	/**
+	 * @see #360
+	 */
+	@Test
+	public void doesNotSupportAnythingButTheConfiguredClassForCanWriteWithContextClass() {
+
+		TypeConstrainedMappingJackson2HttpMessageConverter converter = new TypeConstrainedMappingJackson2HttpMessageConverter(
+				ResourceSupport.class);
+
+		assertThat(converter.canWrite(String.class, Object.class, MediaType.APPLICATION_JSON), is(false));
+	}
 }

@@ -76,4 +76,17 @@ public class TypeConstrainedMappingJackson2HttpMessageConverter extends MappingJ
 	public boolean canWrite(Class<?> clazz, MediaType mediaType) {
 		return type.isAssignableFrom(clazz) && super.canWrite(clazz, mediaType);
 	}
+
+	/* 
+	 * (non-Javadoc)
+	 * @see org.springframework.http.converter.GenericHttpMessageConverter#canWrite(java.lang.reflect.Type, java.lang.Class, org.springframework.http.MediaType)
+	 */
+	public boolean canWrite(Type type, Class<?> contextClass, MediaType mediaType) {
+
+		if (type instanceof Class) {
+			return canWrite((Class<?>) type, mediaType);
+		}
+
+		return false;
+	}
 }
