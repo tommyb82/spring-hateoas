@@ -59,6 +59,7 @@ import com.jayway.jsonpath.JsonPath;
  * @author Oliver Gierke
  * @author Dietrich Schulten
  * @author Greg Turnquist
+ * @author Tom Bunting
  * @since 0.11
  */
 public class Traverson {
@@ -373,17 +374,17 @@ public class Traverson {
 
         private Link traverseToLink(boolean expandFinalUrl) {
 
-            Assert.isTrue(rels.size() > 0, "At least one rel needs to be provided!");
-            return new Link(expandFinalUrl ? traverseToExpandedFinalUrl().toString() : traverseToFinalUrl(),
-                    rels.get(rels.size() - 1).getRel());
-        }
-
-		private String traverseToFinalUrl(){
-		    
-		    String uri = getAndFindLinkWithRel(baseUri.toString(), rels.iterator());
-            return new UriTemplate(uri).toString();
+			Assert.isTrue(rels.size() > 0, "At least one rel needs to be provided!");
+			return new Link(expandFinalUrl ? traverseToExpandedFinalUrl().toString() : traverseToFinalUrl(),
+					rels.get(rels.size() - 1).getRel());
 		}
-		
+
+		private String traverseToFinalUrl() {
+
+			String uri = getAndFindLinkWithRel(baseUri.toString(), rels.iterator());
+			return new UriTemplate(uri).toString();
+		}
+
 		private URI traverseToExpandedFinalUrl() {
 
 			String uri = getAndFindLinkWithRel(baseUri.toString(), rels.iterator());
